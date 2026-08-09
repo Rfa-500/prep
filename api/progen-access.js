@@ -46,6 +46,13 @@ module.exports = function handler(request, response) {
 
   const { password, action } = request.body || {};
   if (typeof password !== 'string' || password.length === 0 || password.length > 256 || !['verify', 'download', 'copy'].includes(action)) {
+    return response.status(400).json({ error: 'A password and valid action are required.' });
+  }
+
+  if (!/^[a-f0-9]{64}$/i.test(process.env.PROGEN_ACCESS_PASSWORD_HASH || '')) {
+    return response.status(503).json({ error: 'Access is not configured. Set PROGEN_ACCESS_PASSWORD_HASH in Vercel.' });
+  }
+
   if (typeof password !== 'string' || !['download', 'copy'].includes(action)) {
     return response.status(400).json({ error: 'A password and valid action are required.' });
   }

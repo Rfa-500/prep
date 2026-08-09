@@ -102,6 +102,7 @@ h1 span { color: transparent; background: linear-gradient(100deg, #ab8cff, var(-
 }
 .button:hover { transform: translateY(-2px); }
 .button:disabled { cursor: wait; opacity: .62; transform: none; }
+.button[hidden] { display: none; }
 .primary-button { background: linear-gradient(115deg, #7950f2, #5179ff); box-shadow: 0 13px 35px rgba(96,72,255,.34); }
 .secondary-button { background: rgba(255,255,255,.08); border: 1px solid var(--line); }
 .trust-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 13px 25px; margin-top: 35px; color: #7e829e; font-size: .79rem; }
@@ -114,11 +115,15 @@ h1 span { color: transparent; background: linear-gradient(100deg, #ab8cff, var(-
 .status { margin: 16px auto 24px; color: var(--muted); }
 .status strong { color: #70e6c5; font-weight: 700; }
 
+.code-preview { position: relative; margin: 25px 0; padding: 18px; text-align: left; background: rgba(3,4,12,.68); border: 1px solid var(--line); border-radius: 18px; }
 .code-preview { margin: 25px 0; padding: 18px; text-align: left; background: rgba(3,4,12,.68); border: 1px solid var(--line); border-radius: 18px; }
 .window-bar { display: flex; gap: 7px; margin-bottom: 17px; }
 .window-bar i { width: 9px; height: 9px; border-radius: 50%; background: #ff6686; }
 .window-bar i:nth-child(2) { background: #ffd166; }.window-bar i:nth-child(3) { background: #5ee6ba; }
 .code-preview pre { margin: 0; overflow-x: auto; }
+.code-preview code { display: block; color: #d9dcef; font: 500 .86rem/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; filter: blur(4px); opacity: .8; user-select: none; }
+.preview-label { position: absolute; inset: 50% auto auto 50%; padding: 9px 13px; color: #e9e5ff; background: rgba(12,13,27,.84); border: 1px solid rgba(255,255,255,.14); border-radius: 999px; box-shadow: 0 8px 30px rgba(0,0,0,.35); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; transform: translate(-50%, -50%); backdrop-filter: blur(8px); }
+.fake-line { display: none; }
 .code-preview code { color: #d9dcef; font: 500 .86rem/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 .token-comment { color: #737b99; font-style: italic; }
 .token-keyword { color: #c792ea; }
