@@ -116,6 +116,7 @@ h1 span { color: transparent; background: linear-gradient(100deg, #ab8cff, var(-
 .status strong { color: #70e6c5; font-weight: 700; }
 
 .code-preview { position: relative; margin: 25px 0; padding: 18px; text-align: left; background: rgba(3,4,12,.68); border: 1px solid var(--line); border-radius: 18px; }
+.code-preview { margin: 25px 0; padding: 18px; text-align: left; background: rgba(3,4,12,.68); border: 1px solid var(--line); border-radius: 18px; }
 .window-bar { display: flex; gap: 7px; margin-bottom: 17px; }
 .window-bar i { width: 9px; height: 9px; border-radius: 50%; background: #ff6686; }
 .window-bar i:nth-child(2) { background: #ffd166; }.window-bar i:nth-child(3) { background: #5ee6ba; }
@@ -123,11 +124,17 @@ h1 span { color: transparent; background: linear-gradient(100deg, #ab8cff, var(-
 .code-preview code { display: block; color: #d9dcef; font: 500 .86rem/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; filter: blur(4px); opacity: .8; user-select: none; }
 .preview-label { position: absolute; inset: 50% auto auto 50%; padding: 9px 13px; color: #e9e5ff; background: rgba(12,13,27,.84); border: 1px solid rgba(255,255,255,.14); border-radius: 999px; box-shadow: 0 8px 30px rgba(0,0,0,.35); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; transform: translate(-50%, -50%); backdrop-filter: blur(8px); }
 .fake-line { display: none; }
+.code-preview code { color: #d9dcef; font: 500 .86rem/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 .token-comment { color: #737b99; font-style: italic; }
 .token-keyword { color: #c792ea; }
 .token-function { color: #75dcff; }
 .token-string { color: #c3e88d; }
 .token-number { color: #f7b267; }
+.fake-line { height: 8px; margin: 10px 0; border-radius: 8px; filter: blur(3px); opacity: .75; }
+.fake-line:nth-child(4n+1) { width: 72%; background: linear-gradient(90deg, #bf8cff 15%, #70dfff 15% 60%, #ff8bb6 60%); }
+.fake-line:nth-child(4n+2) { width: 91%; background: linear-gradient(90deg, #5fe0bd 28%, #b88cff 28% 54%, #ffd166 54%); }
+.fake-line:nth-child(4n+3) { width: 62%; margin-left: 8%; background: linear-gradient(90deg, #ff88ad 35%, #75dfff 35%); }
+.fake-line:nth-child(4n) { width: 80%; margin-left: 4%; background: linear-gradient(90deg, #ffd166 25%, #966fff 25% 73%, #5ee6ba 73%); }
 
 .access-form { max-width: 500px; margin: 0 auto; }
 .password-panel[hidden], .action-panel[hidden] { display: none; }
