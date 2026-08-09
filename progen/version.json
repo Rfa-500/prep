@@ -2,6 +2,6 @@
   "appName": "Progen Turbo",
   "latestVersion": "5.7",
   "downloadUrl": "https://progren.vercel.app/progen",
-  "changelog": "Protected access page and version check support",
+  "changelog": "Version 5.7 with protected access and version check support",
   "forceUpdate": false
 }
