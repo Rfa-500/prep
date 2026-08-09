@@ -46,6 +46,7 @@ module.exports = function handler(request, response) {
 
   const { password, action } = request.body || {};
   if (typeof password !== 'string' || password.length === 0 || password.length > 256 || !['verify', 'download', 'copy'].includes(action)) {
+  if (typeof password !== 'string' || !['download', 'copy'].includes(action)) {
     return response.status(400).json({ error: 'A password and valid action are required.' });
   }
 
