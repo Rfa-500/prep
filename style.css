@@ -118,6 +118,13 @@ h1 span { color: transparent; background: linear-gradient(100deg, #ab8cff, var(-
 .window-bar { display: flex; gap: 7px; margin-bottom: 17px; }
 .window-bar i { width: 9px; height: 9px; border-radius: 50%; background: #ff6686; }
 .window-bar i:nth-child(2) { background: #ffd166; }.window-bar i:nth-child(3) { background: #5ee6ba; }
+.code-preview pre { margin: 0; overflow-x: auto; }
+.code-preview code { color: #d9dcef; font: 500 .86rem/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+.token-comment { color: #737b99; font-style: italic; }
+.token-keyword { color: #c792ea; }
+.token-function { color: #75dcff; }
+.token-string { color: #c3e88d; }
+.token-number { color: #f7b267; }
 .fake-line { height: 8px; margin: 10px 0; border-radius: 8px; filter: blur(3px); opacity: .75; }
 .fake-line:nth-child(4n+1) { width: 72%; background: linear-gradient(90deg, #bf8cff 15%, #70dfff 15% 60%, #ff8bb6 60%); }
 .fake-line:nth-child(4n+2) { width: 91%; background: linear-gradient(90deg, #5fe0bd 28%, #b88cff 28% 54%, #ffd166 54%); }

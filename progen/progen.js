@@ -19,12 +19,44 @@
     passwordInput.focus();
   });
 
+  async function verifyPassword() {
   function revealActions() {
     if (!passwordInput.value) {
       showMessage('Enter your access password to continue.');
       passwordInput.focus();
       return;
     }
+
+    unlockButton.disabled = true;
+    showMessage('Verifying password…', true);
+    try {
+      const response = await requestAccess('verify');
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || 'Password verification failed.');
+      }
+      passwordPanel.hidden = true;
+      actionPanel.hidden = false;
+      showMessage('Password verified. Choose how to receive the script.', true);
+    } catch (error) {
+      showMessage(error.message);
+      passwordInput.select();
+    } finally {
+      unlockButton.disabled = false;
+    }
+  }
+
+  function requestAccess(action) {
+    return fetch('/api/progen-access', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: passwordInput.value, action })
+    });
+  }
+
+  unlockButton.addEventListener('click', verifyPassword);
+  passwordInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') verifyPassword();
     passwordPanel.hidden = true;
     actionPanel.hidden = false;
     showMessage('Choose how you want to receive the script.', true);
@@ -44,6 +76,7 @@
     showMessage(action === 'copy' ? 'Preparing secure copy…' : 'Preparing secure download…', true);
 
     try {
+      const response = await requestAccess(action);
       const response = await fetch('/api/progen-access', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -73,6 +106,11 @@
       }
     } catch (error) {
       showMessage(error.message);
+      if (error.message === 'Incorrect password.') {
+        actionPanel.hidden = true;
+        passwordPanel.hidden = false;
+        passwordInput.select();
+      }
     } finally {
       button.disabled = false;
     }
