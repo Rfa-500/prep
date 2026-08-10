@@ -1,0 +1,26 @@
+{
+  "cleanUrls": true,
+  "functions": {
+    "api/progen-access.js": {
+      "includeFiles": "protected/progen-turbo.user.js"
+    }
+  },
+  "headers": [
+    {
+      "source": "/progen/version.json",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" },
+        { "key": "Cache-Control", "value": "public, max-age=60, s-maxage=60" }
+      ]
+    }
+  ],
+  "redirects": [
+    { "source": "/progren", "destination": "/progen", "permanent": false },
+    { "source": "/progren/", "destination": "/progen", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/protected/:path*", "destination": "/" }
+  ]
+}
