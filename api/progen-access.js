@@ -53,6 +53,10 @@ module.exports = function handler(request, response) {
     return response.status(503).json({ error: 'Access is not configured. Set PROGEN_ACCESS_PASSWORD_HASH in Vercel.' });
   }
 
+  if (typeof password !== 'string' || !['download', 'copy'].includes(action)) {
+    return response.status(400).json({ error: 'A password and valid action are required.' });
+  }
+
   const submittedHash = crypto.createHash('sha256').update(password, 'utf8').digest('hex');
   if (!hashesMatch(submittedHash, process.env.PROGEN_ACCESS_PASSWORD_HASH)) {
     record.failures += 1;
