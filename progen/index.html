@@ -53,6 +53,11 @@
     .pt-gate[open] summary { display: none; }
     #pt-access { display: none !important; }
     .pt-password label { display: block; margin-bottom: 8px; color: #c7c9d9; text-align: left; font-size: .86rem; font-weight: 700; }
+    .pt-input-row { display: flex; }
+    .pt-input { width: 100%; min-width: 0; min-height: 52px; padding: 0 15px; color: white; background: #070914; border: 1px solid rgba(255, 255, 255, .13); border-radius: 14px; outline: none; font: inherit; }
+    .pt-input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(141, 99, 255, .14); }
+    .pt-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pt-actions .pt-button { display: flex; align-items: center; justify-content: center; text-decoration: none; }
     .pt-input-row { display: flex; gap: 10px; }
     .pt-input { min-width: 0; min-height: 52px; flex: 1; padding: 0 15px; color: white; background: #070914; border: 1px solid rgba(255, 255, 255, .13); border-radius: 14px; outline: none; font: inherit; }
     .pt-input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(141, 99, 255, .14); }
@@ -96,6 +101,13 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
           <form class="pt-password" id="pt-password-form">
             <label for="pt-password">Access password</label>
             <div class="pt-input-row">
+              <input class="pt-input" id="pt-password" type="password" autocomplete="current-password" placeholder="Enter password and press Enter">
+            </div>
+          </form>
+        </details>
+        <div class="pt-actions" id="pt-actions" hidden>
+          <button class="pt-button" id="pt-copy" type="button">Copy Script</button>
+          <a class="pt-button pt-button-secondary" href="https://pastebin.com/s9XsfFX5" target="_blank" rel="noopener noreferrer">Open Script</a>
               <input class="pt-input" id="pt-password" type="password" autocomplete="current-password" placeholder="Enter your password">
               <button class="pt-button" id="pt-verify" type="submit">Verify</button>
             </div>
@@ -126,6 +138,7 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
     </section>
   </main>
 
+  <script src="/progen/progen-5.8.js?v=simple" defer></script>
   <script src="/progen/progen-5.8.js" defer></script>
   <script>
     (() => {
