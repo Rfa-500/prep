@@ -16,6 +16,10 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/progren", "destination": "/progen", "permanent": false },
+    { "source": "/progren/", "destination": "/progen", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/protected/:path*", "destination": "/" }
   ]
