@@ -3,5 +3,12 @@
   "latestVersion": "5.8",
   "downloadUrl": "https://progren.vercel.app/progen",
   "changelog": "Version 5.8 with simple access to the Pastebin script",
+  "changelog": "Version 5.8 with reliable protected access controls",
+  "latestVersion": "5.7",
+  "downloadUrl": "https://progren.vercel.app/progen",
+  "changelog": "Version 5.7 with protected access and version check support",
+  "latestVersion": "5.5",
+  "downloadUrl": "https://progren.vercel.app/progen",
+  "changelog": "Protected access page and version check support",
   "forceUpdate": false
 }

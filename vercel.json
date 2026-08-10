@@ -1,5 +1,10 @@
 {
   "cleanUrls": true,
+  "functions": {
+    "api/progen-access.js": {
+      "includeFiles": "protected/progen-turbo.user.js"
+    }
+  },
   "headers": [
     {
       "source": "/progen/version.json",
@@ -14,5 +19,8 @@
   "redirects": [
     { "source": "/progren", "destination": "/progen", "permanent": false },
     { "source": "/progren/", "destination": "/progen", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/protected/:path*", "destination": "/" }
   ]
 }
