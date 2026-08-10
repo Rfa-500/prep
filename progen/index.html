@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Secure access to Progen Turbo 5.8.">
+  <title>Progen Turbo 5.8 — Secure Access</title>
   <meta name="description" content="Secure access to Progen Turbo 5.7.">
   <title>Progen Turbo 5.7 — Secure Access</title>
   <style>
@@ -49,6 +51,7 @@
     .pt-gate summary { display: inline-flex; align-items: center; justify-content: center; list-style: none; }
     .pt-gate summary::-webkit-details-marker { display: none; }
     .pt-gate[open] summary { display: none; }
+    #pt-access { display: none !important; }
     .pt-password label { display: block; margin-bottom: 8px; color: #c7c9d9; text-align: left; font-size: .86rem; font-weight: 700; }
     .pt-input-row { display: flex; gap: 10px; }
     .pt-input { min-width: 0; min-height: 52px; flex: 1; padding: 0 15px; color: white; background: #070914; border: 1px solid rgba(255, 255, 255, .13); border-radius: 14px; outline: none; font: inherit; }
@@ -68,6 +71,9 @@
 <body>
   <main class="pt-page">
     <section class="pt-card" aria-labelledby="pt-title">
+      <div class="pt-top"><p class="pt-kicker">Private release</p><span class="pt-version">Version 5.8</span></div>
+      <h1 class="pt-title" id="pt-title">Progen <span>Turbo</span></h1>
+      <p class="pt-status"><strong>Current version 5.8</strong> · Protected access and version check support</p>
       <div class="pt-top"><p class="pt-kicker">Private release</p><span class="pt-version">Version 5.7</span></div>
       <h1 class="pt-title" id="pt-title">Progen <span>Turbo</span></h1>
       <p class="pt-status"><strong>Current version 5.7</strong> · Protected access and version check support</p>
@@ -77,6 +83,7 @@
         <pre aria-hidden="true"><code><span class="pt-comment">// Fictional preview — protected source stays private</span>
 <span class="pt-keyword">const</span> turbo = <span class="pt-function">createEngine</span>({
   mode: <span class="pt-string">'secure'</span>,
+  version: <span class="pt-string">'5.8'</span>,
   version: <span class="pt-string">'5.7'</span>,
   features: [<span class="pt-string">'speed'</span>, <span class="pt-string">'privacy'</span>]
 });
@@ -86,6 +93,14 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
       <div class="pt-access">
         <details class="pt-gate" id="pt-gate">
           <summary class="pt-button">Access →</summary>
+          <form class="pt-password" id="pt-password-form">
+            <label for="pt-password">Access password</label>
+            <div class="pt-input-row">
+              <input class="pt-input" id="pt-password" type="password" autocomplete="current-password" placeholder="Enter your password">
+              <button class="pt-button" id="pt-verify" type="submit">Verify</button>
+            </div>
+          </form>
+        </details>
           <div class="pt-password" id="pt-password-panel">
             <label for="pt-password">Access password</label>
             <div class="pt-input-row">
@@ -111,6 +126,7 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
     </section>
   </main>
 
+  <script src="/progen/progen-5.8.js" defer></script>
   <script>
     (() => {
       'use strict';
