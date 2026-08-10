@@ -20,6 +20,7 @@
   });
 
   async function verifyPassword() {
+  function revealActions() {
     if (!passwordInput.value) {
       showMessage('Enter your access password to continue.');
       passwordInput.focus();
@@ -56,6 +57,14 @@
   unlockButton.addEventListener('click', verifyPassword);
   passwordInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') verifyPassword();
+    passwordPanel.hidden = true;
+    actionPanel.hidden = false;
+    showMessage('Choose how you want to receive the script.', true);
+  }
+
+  unlockButton.addEventListener('click', revealActions);
+  passwordInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') revealActions();
   });
 
   actionPanel.addEventListener('click', async (event) => {
@@ -68,6 +77,11 @@
 
     try {
       const response = await requestAccess(action);
+      const response = await fetch('/api/progen-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: passwordInput.value, action })
+      });
 
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
