@@ -108,6 +108,14 @@ h1 span { color: transparent; background: linear-gradient(100deg, #ab8cff, var(-
 .trust-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 13px 25px; margin-top: 35px; color: #7e829e; font-size: .79rem; }
 .trust-row span::before { content: "✓"; margin-right: 7px; color: #5fe0bd; }
 
+.access-card { padding: clamp(24px, 4vw, 36px); }
+.access-card h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+.topline { display: flex; align-items: center; justify-content: center; gap: 13px; flex-wrap: wrap; }
+.version-badge { padding: 7px 11px; color: #d8ccff; background: rgba(141,99,255,.13); border: 1px solid rgba(141,99,255,.33); border-radius: 999px; font-size: .78rem; font-weight: 750; }
+.status { margin: 13px auto 16px; color: var(--muted); }
+.status strong { color: #70e6c5; font-weight: 700; }
+
+.code-preview { position: relative; contain: paint; isolation: isolate; height: 175px; margin: 16px 0 18px; padding: 16px; overflow: hidden; text-align: left; background: rgba(3,4,12,.68); border: 1px solid var(--line); border-radius: 18px; }
 .access-card { padding: clamp(25px, 5vw, 48px); }
 .access-card h1 { font-size: clamp(2.2rem, 7vw, 4.3rem); }
 #progen-app > :not(.release-header):not(.syntax-preview):not(.access-form) { display: none !important; }
@@ -128,6 +136,8 @@ h1 span { color: transparent; background: linear-gradient(100deg, #ab8cff, var(-
 .window-bar i { width: 9px; height: 9px; border-radius: 50%; background: #ff6686; }
 .window-bar i:nth-child(2) { background: #ffd166; }.window-bar i:nth-child(3) { background: #5ee6ba; }
 .code-preview pre { margin: 0; overflow-x: auto; }
+.code-preview code { display: block; color: rgba(217,220,239,.55); font: 500 .78rem/1.5 "SFMono-Regular", Consolas, "Liberation Mono", monospace; user-select: none; }
+.code-preview code span { display: inline-block; filter: blur(2.5px); }
 .code-preview code { display: block; color: rgba(217,220,239,.55); font: 500 .86rem/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; user-select: none; }
 .code-preview code span { display: inline-block; filter: blur(2.5px); }
 .code-preview code { display: block; color: #d9dcef; font: 500 .86rem/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; filter: blur(4px); opacity: .8; user-select: none; }
