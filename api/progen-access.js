@@ -29,6 +29,30 @@ function hashesMatch(candidate, expected) {
   return candidateBuffer.length === expectedBuffer.length && crypto.timingSafeEqual(candidateBuffer, expectedBuffer);
 }
 
+async function parseRequestBody(request) {
+  if (request.body && typeof request.body === 'object' && !Buffer.isBuffer(request.body)) {
+    return request.body;
+  }
+
+  let rawBody = '';
+  if (typeof request.body === 'string' || Buffer.isBuffer(request.body)) {
+    rawBody = request.body.toString();
+  } else if (request[Symbol.asyncIterator]) {
+    for await (const chunk of request) {
+      rawBody += chunk.toString();
+      if (rawBody.length > 4096) throw new Error('REQUEST_TOO_LARGE');
+    }
+  }
+
+  if (!rawBody) return {};
+  try {
+    return JSON.parse(rawBody);
+  } catch {
+    throw new Error('INVALID_JSON');
+  }
+}
+
+module.exports = async function handler(request, response) {
 module.exports = function handler(request, response) {
   response.setHeader('Cache-Control', 'no-store');
 
@@ -44,6 +68,15 @@ module.exports = function handler(request, response) {
     return response.status(429).json({ error: 'Too many failed attempts. Please try again later.' });
   }
 
+  let body;
+  try {
+    body = await parseRequestBody(request);
+  } catch (error) {
+    const message = error.message === 'REQUEST_TOO_LARGE' ? 'Request body is too large.' : 'Request body must be valid JSON.';
+    return response.status(400).json({ error: message });
+  }
+
+  const { password, action } = body;
   const { password, action } = request.body || {};
   if (typeof password !== 'string' || password.length === 0 || password.length > 256 || !['verify', 'download', 'copy'].includes(action)) {
     return response.status(400).json({ error: 'A password and valid action are required.' });
