@@ -10,6 +10,11 @@
 <body>
   <main class="page-shell">
     <section class="glass-card access-card" id="progen-app" data-ui-version="5.7.2" aria-labelledby="page-title">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="glass-card access-card" id="progen-app" aria-labelledby="page-title">
       <header class="release-header">
         <div class="topline">
           <p class="eyebrow">Private release</p>
@@ -18,6 +23,13 @@
         <h1 id="page-title">Progen <span>Turbo</span></h1>
         <p class="status"><strong>Current version 5.7</strong> · Protected access page and version check support</p>
       </header>
+    <section class="glass-card access-card" aria-labelledby="page-title">
+      <div class="topline">
+        <p class="eyebrow">Private release</p>
+        <span class="version-badge">Version 5.7</span>
+      </div>
+      <h1 id="page-title">Progen <span>Turbo</span></h1>
+      <p class="status"><strong>Current version 5.7</strong> · Protected access page and version check support</p>
 
       <div class="code-preview syntax-preview" aria-label="Censored Version 5.7 example code preview">
         <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -25,6 +37,18 @@
 <span class="token-keyword">const</span> turbo = <span class="token-function">createEngine</span>({
   mode: <span class="token-string">'secure'</span>,
   version: <span class="token-string">'5.7'</span>,
+        <span class="version-badge">Version 5.5</span>
+      </div>
+      <h1 id="page-title">Progen <span>Turbo</span></h1>
+      <p class="status"><strong>Latest release</strong> · Protected access page and version check support</p>
+
+      <div class="code-preview" aria-label="Censored example code preview">
+        <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <pre aria-hidden="true"><code><span class="token-comment">// Preview only — protected source remains private</span>
+        <pre><code><span class="token-comment">// Preview only — protected source remains private</span>
+<span class="token-keyword">const</span> turbo = <span class="token-function">createEngine</span>({
+  mode: <span class="token-string">'secure'</span>,
+  version: <span class="token-string">'5.5'</span>,
   features: [<span class="token-string">'speed'</span>, <span class="token-string">'privacy'</span>]
 });
 
@@ -34,12 +58,22 @@ turbo.<span class="token-function">onReady</span>(() <span class="token-keyword"
       </div>
 
       <div class="access-form" aria-label="Script access controls">
+        <span class="preview-label">Protected preview</span>
+      <div class="code-preview" aria-label="Censored decorative script preview">
+        <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="fake-line"></div><div class="fake-line"></div><div class="fake-line"></div>
+        <div class="fake-line"></div><div class="fake-line"></div><div class="fake-line"></div>
+        <div class="fake-line"></div><div class="fake-line"></div>
+      </div>
+
+      <div class="access-form">
         <button class="button primary-button" id="access-button" type="button">Access <span aria-hidden="true">→</span></button>
         <div class="password-panel" id="password-panel" hidden>
           <label for="password">Access password</label>
           <div class="input-row">
             <input id="password" type="password" autocomplete="current-password" placeholder="Enter your password">
             <button class="button primary-button" id="unlock-button" type="button">Verify</button>
+            <button class="button primary-button" id="unlock-button" type="button">Continue</button>
           </div>
         </div>
         <div class="action-panel" id="action-panel" hidden>
@@ -51,5 +85,6 @@ turbo.<span class="token-function">onReady</span>(() <span class="token-keyword"
     </section>
   </main>
   <script src="/progen/progen.js?v=5.7.2" defer></script>
+  <script src="/progen/progen.js" defer></script>
 </body>
 </html>
