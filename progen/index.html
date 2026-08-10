@@ -46,6 +46,9 @@
     .pt-button { min-height: 52px; padding: 0 24px; color: white; background: linear-gradient(115deg, #7950f2, #5179ff); border: 0; border-radius: 14px; box-shadow: 0 12px 32px rgba(96, 72, 255, .3); cursor: pointer; font: inherit; font-weight: 800; }
     .pt-button:hover { transform: translateY(-1px); }.pt-button:disabled { opacity: .6; cursor: wait; transform: none; }
     .pt-button-secondary { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12); box-shadow: none; }
+    .pt-gate summary { display: inline-flex; align-items: center; justify-content: center; list-style: none; }
+    .pt-gate summary::-webkit-details-marker { display: none; }
+    .pt-gate[open] summary { display: none; }
     .pt-password label { display: block; margin-bottom: 8px; color: #c7c9d9; text-align: left; font-size: .86rem; font-weight: 700; }
     .pt-input-row { display: flex; gap: 10px; }
     .pt-input { min-width: 0; min-height: 52px; flex: 1; padding: 0 15px; color: white; background: #070914; border: 1px solid rgba(255, 255, 255, .13); border-radius: 14px; outline: none; font: inherit; }
@@ -81,6 +84,16 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
       </div>
 
       <div class="pt-access">
+        <details class="pt-gate" id="pt-gate">
+          <summary class="pt-button">Access →</summary>
+          <div class="pt-password" id="pt-password-panel">
+            <label for="pt-password">Access password</label>
+            <div class="pt-input-row">
+              <input class="pt-input" id="pt-password" type="password" autocomplete="current-password" placeholder="Enter your password">
+              <button class="pt-button" id="pt-verify" type="button">Verify</button>
+            </div>
+          </div>
+        </details>
         <button class="pt-button" id="pt-access" type="button">Access →</button>
         <div class="pt-password" id="pt-password-panel" hidden>
           <label for="pt-password">Access password</label>
@@ -101,6 +114,7 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
   <script>
     (() => {
       'use strict';
+      const gate = document.querySelector('#pt-gate');
       const access = document.querySelector('#pt-access');
       const panel = document.querySelector('#pt-password-panel');
       const password = document.querySelector('#pt-password');
@@ -128,6 +142,8 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
         return result;
       };
 
+      gate.addEventListener('toggle', () => {
+        if (gate.open) window.setTimeout(() => password.focus(), 0);
       access.addEventListener('click', () => {
         access.hidden = true;
         panel.hidden = false;
@@ -141,6 +157,8 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
         try {
           const response = await request('verify');
           await readResponse(response);
+          gate.open = false;
+          gate.hidden = true;
           const result = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(result.error || 'Password verification failed.');
           panel.hidden = true;
@@ -148,6 +166,8 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
           setMessage('Password verified.', true);
         } catch (error) {
           actions.hidden = true;
+          gate.hidden = false;
+          gate.open = true;
           panel.hidden = false;
           setMessage(error.message);
           password.select();
@@ -184,6 +204,7 @@ turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span
           }
         } catch (error) {
           setMessage(error.message);
+          if (error.message === 'Incorrect password.') { actions.hidden = true; gate.hidden = false; gate.open = true; password.select(); }
           if (error.message === 'Incorrect password.') { actions.hidden = true; panel.hidden = false; password.select(); }
         } finally { button.disabled = false; }
       });
