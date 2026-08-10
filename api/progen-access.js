@@ -29,6 +29,14 @@ function hashesMatch(candidate, expected) {
   return candidateBuffer.length === expectedBuffer.length && crypto.timingSafeEqual(candidateBuffer, expectedBuffer);
 }
 
+function getConfiguredPasswordHash() {
+  const value = String(process.env.PROGEN_ACCESS_PASSWORD_HASH || '').trim();
+  if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+    return value.slice(1, -1).trim();
+  }
+  return value;
+}
+
 async function parseRequestBody(request) {
   if (request.body && typeof request.body === 'object' && !Buffer.isBuffer(request.body)) {
     return request.body;
@@ -82,6 +90,13 @@ module.exports = function handler(request, response) {
     return response.status(400).json({ error: 'A password and valid action are required.' });
   }
 
+  const configuredHash = getConfiguredPasswordHash();
+  if (!/^[a-f0-9]{64}$/i.test(configuredHash)) {
+    return response.status(503).json({ error: 'Access is not configured. Set PROGEN_ACCESS_PASSWORD_HASH in Vercel.' });
+  }
+
+  const submittedHash = crypto.createHash('sha256').update(password, 'utf8').digest('hex');
+  if (!hashesMatch(submittedHash, configuredHash)) {
   if (!/^[a-f0-9]{64}$/i.test(process.env.PROGEN_ACCESS_PASSWORD_HASH || '')) {
     return response.status(503).json({ error: 'Access is not configured. Set PROGEN_ACCESS_PASSWORD_HASH in Vercel.' });
   }
