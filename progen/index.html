@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Secure access to Progen Turbo 5.8.">
+  <title>Progen Turbo 5.8 — Secure Access</title>
+  <style>
+    :root { color-scheme: dark; --violet: #8d63ff; --cyan: #60d8ff; --muted: #aeb1c7; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #f8f7ff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 18% 20%, rgba(111, 67, 255, .25), transparent 33rem), radial-gradient(circle at 85% 80%, rgba(44, 190, 255, .13), transparent 28rem), #070812;
+    }
+    .pt-page { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+    .pt-card {
+      width: min(100%, 760px);
+      padding: clamp(24px, 4vw, 38px);
+      text-align: center;
+      background: rgba(17, 19, 36, .88);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 28px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .48), inset 0 1px rgba(255, 255, 255, .06);
+    }
+    .pt-top { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .pt-kicker { margin: 0; color: var(--cyan); font-size: .76rem; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
+    .pt-version { padding: 7px 12px; color: #ddd3ff; background: rgba(141, 99, 255, .15); border: 1px solid rgba(141, 99, 255, .42); border-radius: 999px; font-size: .8rem; font-weight: 800; }
+    .pt-title { margin: 13px 0 0; font-size: clamp(2.5rem, 8vw, 4.25rem); line-height: 1; letter-spacing: -.065em; }
+    .pt-title span { color: transparent; background: linear-gradient(105deg, #9c82ff, var(--cyan)); background-clip: text; }
+    .pt-status { margin: 15px 0 19px; color: var(--muted); line-height: 1.5; }
+    .pt-status strong { color: #73e4c2; }
+    .pt-preview { height: 185px; padding: 16px; overflow: hidden; text-align: left; background: #070914; border: 1px solid rgba(255, 255, 255, .12); border-radius: 17px; }
+    .pt-dots { display: flex; gap: 7px; margin-bottom: 13px; }
+    .pt-dots i { width: 9px; height: 9px; border-radius: 50%; background: #f56585; }
+    .pt-dots i:nth-child(2) { background: #ffd166; }
+    .pt-dots i:nth-child(3) { background: #69ddb9; }
+    .pt-preview pre { margin: 0; overflow: hidden; }
+    .pt-preview code { display: block; color: #d9dcef; font: 500 .77rem/1.48 "SFMono-Regular", Consolas, monospace; user-select: none; }
+    .pt-preview code span { display: inline-block; filter: blur(2.3px); }
+    .pt-comment { color: #767e99; }.pt-keyword { color: #c792ea; }.pt-function { color: #75dcff; }.pt-string { color: #c3e88d; }.pt-number { color: #f7b267; }
+    .pt-access { position: relative; margin: 18px auto 0; max-width: 510px; }
+    .pt-button { min-height: 52px; padding: 0 24px; color: white; background: linear-gradient(115deg, #7950f2, #5179ff); border: 0; border-radius: 14px; box-shadow: 0 12px 32px rgba(96, 72, 255, .3); cursor: pointer; font: inherit; font-weight: 800; }
+    .pt-button:hover { transform: translateY(-1px); }.pt-button:disabled { opacity: .6; cursor: wait; transform: none; }
+    .pt-button-secondary { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .12); box-shadow: none; }
+    .pt-gate summary { display: inline-flex; align-items: center; justify-content: center; list-style: none; }
+    .pt-gate summary::-webkit-details-marker { display: none; }
+    .pt-gate[open] summary { display: none; }
+    #pt-access { display: none !important; }
+    .pt-password label { display: block; margin-bottom: 8px; color: #c7c9d9; text-align: left; font-size: .86rem; font-weight: 700; }
+    .pt-input-row { display: flex; gap: 10px; }
+    .pt-input { min-width: 0; min-height: 52px; flex: 1; padding: 0 15px; color: white; background: #070914; border: 1px solid rgba(255, 255, 255, .13); border-radius: 14px; outline: none; font: inherit; }
+    .pt-input:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(141, 99, 255, .14); }
+    .pt-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pt-message { min-height: 21px; margin: 10px 0 0; color: #ff91a8; font-size: .88rem; }
+    .pt-message.pt-success { color: #69dfbd; }
+    @media (max-width: 540px) {
+      .pt-card { border-radius: 22px; }
+      .pt-preview { height: 165px; }
+      .pt-input-row { flex-direction: column; }
+      .pt-actions { grid-template-columns: 1fr; }
+      .pt-button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="pt-page">
+    <section class="pt-card" aria-labelledby="pt-title">
+      <div class="pt-top"><p class="pt-kicker">Private release</p><span class="pt-version">Version 5.8</span></div>
+      <h1 class="pt-title" id="pt-title">Progen <span>Turbo</span></h1>
+      <p class="pt-status"><strong>Current version 5.8</strong> · Protected access and version check support</p>
+
+      <div class="pt-preview" aria-label="Censored, fictional code preview">
+        <div class="pt-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <pre aria-hidden="true"><code><span class="pt-comment">// Fictional preview — protected source stays private</span>
+<span class="pt-keyword">const</span> turbo = <span class="pt-function">createEngine</span>({
+  mode: <span class="pt-string">'secure'</span>,
+  version: <span class="pt-string">'5.8'</span>,
+  features: [<span class="pt-string">'speed'</span>, <span class="pt-string">'privacy'</span>]
+});
+turbo.<span class="pt-function">launch</span>(<span class="pt-number">true</span>);</code></pre>
+      </div>
+
+      <div class="pt-access">
+        <details class="pt-gate" id="pt-gate">
+          <summary class="pt-button">Access →</summary>
+          <form class="pt-password" id="pt-password-form">
+            <label for="pt-password">Access password</label>
+            <div class="pt-input-row">
+              <input class="pt-input" id="pt-password" type="password" autocomplete="current-password" placeholder="Enter your password">
+              <button class="pt-button" id="pt-verify" type="submit">Verify</button>
+            </div>
+          </form>
+        </details>
+        <div class="pt-actions" id="pt-actions" hidden>
+          <button class="pt-button" data-action="download" type="button">Download Script</button>
+          <button class="pt-button pt-button-secondary" data-action="copy" type="button">Copy Script</button>
+        </div>
+        <p class="pt-message" id="pt-message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/progen/progen-5.8.js" defer></script>
+</body>
+</html>
