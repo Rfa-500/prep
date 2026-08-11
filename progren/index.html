@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Progen Turbo 5.8 script access.">
+  <title>Progen Turbo 5.8</title>
+  <style>
+    :root { color-scheme: dark; --violet: #8d68ff; --blue: #61cfff; --muted: #aeb1c7; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; min-height: 100vh; color: #f8f7ff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: radial-gradient(circle at 18% 15%, rgba(98, 55, 220, .25), transparent 35rem), radial-gradient(circle at 85% 80%, rgba(45, 187, 255, .13), transparent 30rem), #070812; }
+    .page { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+    .card { width: min(100%, 750px); padding: clamp(26px, 5vw, 44px); text-align: center; background: rgba(17, 19, 36, .88); border: 1px solid rgba(255,255,255,.12); border-radius: 28px; box-shadow: 0 30px 90px rgba(0,0,0,.5), inset 0 1px rgba(255,255,255,.06); }
+    .release { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .eyebrow { margin: 0; color: var(--blue); font-size: .75rem; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
+    .version { padding: 7px 12px; color: #ded4ff; background: rgba(141,104,255,.15); border: 1px solid rgba(141,104,255,.43); border-radius: 999px; font-size: .8rem; font-weight: 800; }
+    h1 { margin: 14px 0 0; font-size: clamp(2.7rem, 9vw, 4.5rem); line-height: 1; letter-spacing: -.065em; }
+    h1 span { color: transparent; background: linear-gradient(105deg, #a087ff, var(--blue)); background-clip: text; }
+    .status { margin: 15px 0 20px; color: var(--muted); }
+    .status strong { color: #72e3bd; }
+    .preview { height: 190px; padding: 17px; overflow: hidden; text-align: left; background: #070914; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; }
+    .dots { display: flex; gap: 7px; margin-bottom: 14px; }
+    .dots i { width: 9px; height: 9px; border-radius: 50%; background: #f56585; }.dots i:nth-child(2) { background: #ffd166; }.dots i:nth-child(3) { background: #69ddb9; }
+    pre { margin: 0; overflow: hidden; } code { display: block; color: #d9dcef; font: 500 .8rem/1.5 "SFMono-Regular", Consolas, monospace; user-select: none; }
+    code span { display: inline-block; filter: blur(2.4px); }.comment { color: #747d9b; }.keyword { color: #c792ea; }.function { color: #75dcff; }.string { color: #c3e88d; }.number { color: #f7b267; }
+    .controls { max-width: 500px; margin: 19px auto 0; }
+    .button { min-height: 54px; display: inline-flex; align-items: center; justify-content: center; padding: 0 26px; color: white; background: linear-gradient(115deg, #7950f2, #5179ff); border: 0; border-radius: 15px; box-shadow: 0 13px 35px rgba(96,72,255,.34); cursor: pointer; font: inherit; font-weight: 800; }
+    .button:hover { transform: translateY(-1px); }.button:disabled { opacity: .6; cursor: wait; transform: none; }
+    .password { width: 100%; min-height: 54px; padding: 0 16px; color: white; background: #070914; border: 1px solid rgba(255,255,255,.14); border-radius: 15px; outline: none; font: inherit; }
+    .password:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(141,104,255,.14); }
+    .message { min-height: 21px; margin: 10px 0 0; color: #ff91a8; font-size: .88rem; }.message.success { color: #69dfbd; }
+    @media (max-width: 540px) { .card { border-radius: 22px; }.preview { height: 170px; }.button { width: 100%; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card" aria-labelledby="title">
+      <div class="release"><p class="eyebrow">Private release</p><span class="version">Version 5.8</span></div>
+      <h1 id="title">Progen <span>Turbo</span></h1>
+      <p class="status"><strong>Current version 5.8</strong> · Private script access</p>
+
+      <div class="preview" aria-label="Censored fictional code preview">
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <pre aria-hidden="true"><code><span class="comment">// Protected Progen Turbo source</span>
+<span class="keyword">const</span> turbo = <span class="function">createEngine</span>({
+  version: <span class="string">'5.8'</span>,
+  access: <span class="string">'private'</span>,
+  enabled: <span class="number">true</span>
+});
+turbo.<span class="function">launch</span>();</code></pre>
+      </div>
+
+      <div class="controls">
+        <button class="button" id="access" type="button">Access →</button>
+        <input class="password" id="password" type="password" autocomplete="current-password" placeholder="Enter password and press Enter" aria-label="Access password" hidden>
+        <button class="button" id="copy" type="button" hidden>Copy Script</button>
+        <p class="message" id="message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+  <script src="/progren/access.js?v=5.8" defer></script>
+</body>
+</html>
